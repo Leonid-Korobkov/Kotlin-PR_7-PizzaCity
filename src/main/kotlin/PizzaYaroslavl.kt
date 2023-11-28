@@ -1,3 +1,4 @@
+// Класс представляющий пиццерию в Ярославле
 class PizzaYaroslavl(
     neapolitanPizzaPrice: Double,
     romanPizzaPrice: Double,
@@ -10,15 +11,20 @@ class PizzaYaroslavl(
     tyroleanPizzaPrice
 ), Drink, CheckPhoto, SauceSelector {
 
+    // Мапа для хранения цен на соусы
     override val saucePrices: Map<String, Int> = mapOf(
         "Томатный соус" to 35,
         "Сливочный соус" to 30
     )
+
+    // Мапа для хранения статистики по продажам соусов
     override val sauceStatistics: MutableMap<String, Int> = mutableMapOf()
 
+    // Переменные для отслеживания количества показанных чеков и общей суммы скидок
     override var countChecksShown: Int = 0
     override var totalDiscount: Int = 0
 
+    // Мапа для хранения статистики по продажам кофе к разным видам пиццы
     var pizzaCoffee = mutableMapOf(
         "neapolitanPizza" to 0,
         "romanPizza" to 0,
@@ -26,10 +32,11 @@ class PizzaYaroslavl(
         "tyroleanPizza" to 0
     )
 
+    // Переменные для отслеживания количества проданных кофе и общей выручки от продажи кофе
     override var countCoffee = 0
     override var totalCoffeeMoney = 0
 
-
+    // Метод для отображения статистики по продажам кофе
     fun showStatisticCoffee() {
         println("Кофе к неапольтанской пицце купили ${pizzaCoffee["neapolitanPizza"]} из $neapolitanPizzaCount = ${if (neapolitanPizzaCount != 0) "${pizzaCoffee["neapolitanPizza"]!!.toInt() * 100 / neapolitanPizzaCount}%" else "0%"}")
         println("Кофе к римской пицце купили ${pizzaCoffee["romanPizza"]} из $romanPizzaCount = ${if (romanPizzaCount != 0) "${pizzaCoffee["romanPizza"]!!.toInt() * 100 / romanPizzaCount}%" else "0%"}")
@@ -57,6 +64,7 @@ class PizzaYaroslavl(
         println("Спасибо за покупку тирольской пиццы в Ярославле")
     }
 
+    // Метод для реализации продажи напитка к пицце
     override fun drinkSale(currentPizza: String) {
         println("Вы будете кофе?")
         println("1. Да\n2. Нет")
@@ -69,6 +77,7 @@ class PizzaYaroslavl(
         countCustomers++
     }
 
+    // Метод для реализации показа фотографии чека
     override fun showCheckPhoto() {
         println("У вас есть фотография чека?")
         println("1. Да\n2. Нет")
@@ -79,6 +88,7 @@ class PizzaYaroslavl(
         }
     }
 
+    // Метод для отображения общей статистики по продажам
     override fun showStatistics() {
         super.showStatistics()
         println()
@@ -112,6 +122,7 @@ class PizzaYaroslavl(
         println()
     }
 
+    // Метод для получения общей выручки (кофе, скидки, соусы)
     override fun getAdditionMoney(): Int {
         return +totalCoffeeMoney - totalDiscount + getSauceRevenue()
     }

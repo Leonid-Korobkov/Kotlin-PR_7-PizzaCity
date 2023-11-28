@@ -1,3 +1,4 @@
+// Класс представляющий пиццерию в Москве
 class PizzaMoscow(
     neapolitanPizzaPrice: Double,
     romanPizzaPrice: Double,
@@ -10,9 +11,11 @@ class PizzaMoscow(
     tyroleanPizzaPrice
 ), CheckPhoto {
 
+    // Переменные для отслеживания количества показанных чеков и общей суммы скидок
     override var countChecksShown: Int = 0
     override var totalDiscount: Int = 0
 
+    // Реализация методов продажи различных видов пиццы
     override fun neapolitanPizzaSale() {
         neapolitanPizzaCount++
         println("Спасибо за покупку неаполитанской пиццы в Москве")
@@ -33,6 +36,7 @@ class PizzaMoscow(
         println("Спасибо за покупку тирольской пиццы в Москве")
     }
 
+    // Реализация метода для показа фотографии чека
     override fun showCheckPhoto() {
         println("У вас есть фотография чека?")
         println("1. Да\n2. Нет")
@@ -44,6 +48,7 @@ class PizzaMoscow(
         countCustomers++
     }
 
+    // Реализация метода для вывода статистики
     override fun showStatistics() {
         super.showStatistics()
         println()
@@ -55,6 +60,7 @@ class PizzaMoscow(
         println("Общая сумма скидок: $totalDiscount")
     }
 
+    // Реализация метода для получения дополнительной выручки (в данном случае отрицательной, так как это скидка)
     override fun getAdditionMoney(): Int {
         return -totalDiscount
     }

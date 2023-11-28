@@ -1,6 +1,7 @@
 import kotlin.system.exitProcess
 
-fun main(args: Array<String>) {
+fun main() {
+    // Инициализация объектов пиццерий для разных городов
     val pizzaPeter = PizzaPeter(
         175.0, 241.5,
         167.5, 215.0
@@ -14,13 +15,16 @@ fun main(args: Array<String>) {
         170.5, 230.0
     )
 
+    // Переменная для текущей выбранной пиццерии
     var currentPizzaCity: PizzaCity
 
-
-
+    // Основной цикл программы
     while (true) {
+        // Вывод меню выбора города
         println("Добрый день! Выберите город")
         println("1. Москва\n2. Санкт-Петербург\n3. Ярославль\n0. Выход из программы")
+
+        // Обработка выбора города
         currentPizzaCity = when (readln()) {
             "1" -> pizzaMoscow
             "2" -> pizzaPeter
@@ -32,6 +36,7 @@ fun main(args: Array<String>) {
             }
         }
 
+        // Вывод меню выбора пиццы
         println("\nВыберите пиццу:")
         println(
             "1. Неаполитанская пицца\n" +
@@ -40,11 +45,14 @@ fun main(args: Array<String>) {
                     "4. Тирольская пицца\n" +
                     "0. Показать статистику"
         )
+        // Обработка выбора пиццы
         selectPizza(currentPizzaCity)
     }
 }
 
+// Функция для выбора пиццы и вызова соответствующих действий
 private fun selectPizza(currentPizzaCity: PizzaCity) {
+    // Обработка выбора пользователя
     when (readln()) {
         "1" -> {
             currentPizzaCity.neapolitanPizzaSale()
@@ -67,7 +75,6 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
         }
 
         "0" -> currentPizzaCity.showStatistics()
-
         else -> {
             println("ERROR")
             exitProcess(1)
@@ -75,7 +82,9 @@ private fun selectPizza(currentPizzaCity: PizzaCity) {
     }
 }
 
+// Функция для выбора дополнительных услуг пиццерии
 fun selectAddService(currentPizzaCity: PizzaCity, currentPizza: String) {
+    // Обработка выбора дополнительных услуг
     when {
         currentPizzaCity is Drink && currentPizzaCity is CheckPhoto && currentPizzaCity is SauceSelector -> {
             currentPizzaCity.drinkSale(currentPizza)
